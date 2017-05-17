@@ -1,5 +1,6 @@
 \documentclass[12pt, letterpaper]{article}
 \input{preamble.tex}
+\usepackage{graphicx}
 \hypersetup{
     colorlinks,
     citecolor=black,
@@ -7,29 +8,88 @@
     linkcolor=black,
     urlcolor=black
 }
-\title{SRS \\
-Flight Planning
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Page \thepage}
+\lhead{Software Requirements Specification}
+\newcolumntype{R}{>{\raggedleft\arraybackslash}X}%
+\fancypagestyle{style1}{
+\fancyhf{}
+\rhead{Technical Project Proposal\\Plan A}
+\lhead{Flight Plan Editor\\Littke}
+\lfoot{Proposal A}
+\rfoot{04/30/2017}
+\cfoot{\thepage}
+\renewcommand{\footrulewidth}{0.4pt}
+\newcolumntype{R}{>{\raggedleft\arraybackslash}X}%
 }
-\author{ Cedrick Cooke
-    \and Ian Littke
-    \and Owen Roth-Lerner
-    \and Sander Scherman Garzon
-    \and Justine O'Neil
+\fancypagestyle{style2}{
+\fancyhf{}
+\rhead{\\}
+\lhead{\\}
+\renewcommand{\footrulewidth}{0.4pt}
+\newcolumntype{R}{>{\raggedleft\arraybackslash}X}%
 }
-\date{Version 0.2 \\ 2017, February 23}
+\pagestyle{style1}
+
+\makeatletter
+\renewcommand{\maketitle}{\bgroup\setlength{\parindent}{0pt}
+\thispagestyle{empty}
+\null
+  \begin{flushleft}
+  \vspace{15mm}
+  \vskip2mm
+  \Huge{\textbf{\@title}}
+  \vspace{5cm}
+\\CSCI 492: Spring 2017\\
+  \begin{figure}[!ht]
+    \includegraphics[scale=0.5]{cios.png}
+  \end{figure}
+
+  \@author
+  \end{flushleft}\egroup
+}
+\makeatother
+
+\title{Software Requirements Specification\\for\\Flight Plan Editor}
+\date{}
+\author{
+Cedrick Cooke\\
+Ian Littke\\
+Owen Roth-Lerner\\
+Sander Scherman Garzon
+}
 
 \begin{document}
+\pagenumbering{roman}
 \maketitle
 
-\tableofcontents
-\raggedright
-\section*{Summary of Changes}
+\newpage
+\section*{Revision History}
 \begin{tabularx}{\textwidth}{|l|r|X|l|}
-\hline
-Editor & Revision & Description & Date \\ \hline \hline
-Ian Littke & 0.1 & Initial document blocking & 2017-02-21 \\ \hline
-\makecell[cl]{Cedrick Cooke,\\ Owen Roth-Lerner,\\ Sander Scherman Garzon} & 0.2 & Expanded sections 3 and 4 & 2017-02-23 \\ \hline
+\textbf{Name} & \textbf{Date} & \textbf{Reason for Change} & \textbf{Version} \\ \hline \hline
+Ian Littke & 2017-02-21 & Initial document blocking & 0.1 \\ \hline
+\makecell[cl]{Cedrick Cooke,\\ Owen Roth-Lerner,\\ Sander Scherman Garzon} & 2017-02-23 & Expanded sections 3 and 4 & 0.2 \\ \hline
+Ian Litke & 2017-05-16 & Reformat Document & 0.3 \\ \hline
+          &            &                   &     \\ \hline
+          &            &                   &     \\ \hline
+          &            &                   &     \\ \hline
+          &            &                   &     \\ \hline
+          &            &                   &     \\ \hline
+          &            &                   &     \\ \hline
+          &            &                   &     \\ \hline
+          &            &                   &     \\ \hline
+          &            &                   &     \\ \hline
 \end{tabularx}
+
+\newpage
+\setcounter{page}{1}
+\tableofcontents
+\newpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
 
 \section{Introduction}
   \subsection{Purpose}
@@ -50,10 +110,26 @@ Ian Littke & 0.1 & Initial document blocking & 2017-02-21 \\ \hline
 
   \subsection{Project Scope}
   The Flight Planning Editor will allow flight planners in the Civilian Air Patrol (CAP)
-  to plan their flights in an easy fashion and store them in a Secure Digital (SD) card.
+  to create their flight plans in a graphical interface and store them on a Secure Digital (SD) card.
   A detailed project description is available in the \hyperref[sec:ref]{\textit{Flight Plan Editor Vision and Scope Document}}.
   The section in that document titled "Scope of Initial and Subsequent Releases" lists the features that are
   scheduled for full or partial implementation in this release.
+
+  \subsection{Definitions, acronyms, and abbreviations} \label{sec:glossary}
+\begin{description}[style=nextline, leftmargin=10mm, topsep=0mm,noitemsep]
+      \item[CAP] \hfill \ Civilian Air Patrol
+      \item[FAA] \hfill \ Federal Aviation Administration
+      \item[Garmin G1000] \hfill \ Integratead flight instrumentation system used in planes
+      \item[GeoTIFF] \hfill \ Metadata standard which allows georeferenceing information to be embedded within a TIFF file
+      \item[GPS] \hfill \ Global Positioning System
+      \item[Sectional] \hfill \ Sectioned chart covering a section of an area, usually by state
+      \item[SRS] \hfill \ Software Requirements Specification
+      \item[SD Card] \hfill \ Secure Digital Card
+      \item[TIFF] \hfill \ Tagged Image File Format
+      \item[VFR] \hfill \ Visual Flight Rules
+      \item[XML] \hfill \ eXtensible Markup Language
+  \end{description}
+
   \subsection{References}\label{sec:ref}
   \begin{tabularx}{\textwidth}{l|X}
     \hline
@@ -62,18 +138,25 @@ Ian Littke & 0.1 & Initial document blocking & 2017-02-21 \\ \hline
     \hline
   \end{tabularx}
 
+  \newpage
 \section{Overall Description}
-  This section gives an overview of the functionality of the product.
+  This section gives an overview of the proposed functionality of the product.
   It describes the informal requirements and is used to establish a context for the technical
   requirements specification in the next section.
   \subsection{Product Perspective}
-    This flight planning editor addresses a need of the CAP in regards to emergency flight planning.
-    Specifically, this is new software which allows a user to easily input latitude and longitude coordinates to develop flight plans.
-    These flight plans are then able to exported onto SD cards in a format that the Garming G1000 understands.
+    This flight planning editor addresses a CAP emergency flight planning need.
+    Specifically, this new software whill allow a user to input latitude and longitude coordinates 
+    and view them on a map to develop flight plans.
+    These flight plans can then be used in the Garmin G1000 navigation system.
   \subsection{Product Features}
     The most important feature of this product is the ability to read, edit, and write XML containing flight plans.
-    This is done through a user interface which displays a map of the flight plan.
+    This is accomplished through a user interface in which allow the user will enter coordinates which are then
+    displayed on a map for reviewing and modification.
+    Once the flight plan is finished, the user can save their plan to the SD card to be used in the G1000.
   \subsection{User Classes and Characteristics}
+    There is only one type of user that will interact with the system: 
+    users that have the authority to create flight-plans.
+    In the case of the Bellingham CAP, this is limited to two people.
     The user is expected to have knowledge of flying area and can read charts.
     The user shall also be expected to have lattitude-longitude coordinates of
     waypoints of interest to include in the flight plan.
@@ -85,7 +168,8 @@ Ian Littke & 0.1 & Initial document blocking & 2017-02-21 \\ \hline
   \subsection{Design and Implementation Constraints}
     \begin{tabularx}{\textwidth}{|l|X|} \hline
       CO-1: & The system's design and code shall be written in C\#. \\ \hline
-      CO-2: & All flight plans shall be recorded in XML. \\ \hline
+      CO-2: & User interface shall be written in XAML for Windows Presentation Foundation.\\ \hline
+      CO-3: & All flight plans shall be recorded in XML. \\ \hline
     \end{tabularx}
   \subsection{User Documentation}
     \begin{tabularx}{\textwidth}{|l|X|} \hline
@@ -102,24 +186,24 @@ Ian Littke & 0.1 & Initial document blocking & 2017-02-21 \\ \hline
       DE-3: & Flight plan is used in Garmin G1000. \\ \hline
     \end{tabularx}
 
+    \newpage
 \section{System Features}
   \subsection{Display Sectional Map}
     \subsubsection{Description and Priority}
       The application will display the sectional map as the main interface.
       The map will respond to input from lattitude/longitude coordinate input as well
-      as having the ability to pan around the map. Priority = high.
+      as having the ability to pan around the map.
     \subsubsection{Stimulus/Response Sequences}
       \begin{description}
         \item[Stimulus] A user can request to create a new waypoint.
-		\item[Response]	The sectional map will draw a new point on the map to
+		\item[Response]	The sectional map will create a new point on the map to
 			reflect the changes made.
 		\item[Stimulus] A user can also click on the map and drag their mouse 
 			across the screen.
-		\item[Response] The map will maneuver and scroll vertically and horizontally
+    \item[Response] The program will adjust the view of the map vertically and horizontally,
 			in the opposite direction of the mouse pointers movement.
 		\item[Stimulus] A user may also scroll with the mousewheel.
-		\item[Response] The map will either zoom in as the mousewheel is scrolling upwards.
-			or the map can zoom out if scrolling downwards.
+		\item[Response] The map will either zoom in or zoom out depending on the mouse scroll.
       \end{description}
     \subsubsection{Functional Requirements}
     \begin{tabularx}{\textwidth}{|l|X|} \hline
@@ -140,10 +224,10 @@ Ian Littke & 0.1 & Initial document blocking & 2017-02-21 \\ \hline
         \item[Stimulus] User will click on the lattitude text box to input the 
 			lattitude, and complete the same for longitude.
 		\item[Response] Upon completion, the user will hit the enter key on their
-			keyboard, and the sectional map shall display the point respective
+			keyboard, and the map shall display the point respective
 			to the lattitude/longitude input.
 		\item[Stimulus] User can then request to edit an existing waypoint.
-		\item[Response] The coordinate is displayed, and left with the option to
+		\item[Response] The coordinate is displayed, and user will have the option to
 			either save or discard the changes.
       \end{description}
     \subsubsection{Functional Requirements}
@@ -161,8 +245,7 @@ Ian Littke & 0.1 & Initial document blocking & 2017-02-21 \\ \hline
 		for viewing to distinguish each waypoint. Priority = medium.
       \subsubsection{Stimulus/Response Sequences}
         \begin{description}
-          \item[Stimulus] A user can request to view the listed waypoints on the
-			sectional map.
+          \item[Stimulus] A user can request to view the listed waypoints on the map.
 		  \item[Response] The program will display the lattitude/longitude data
 			for that given point on the sectional map, as well as highlight the
 			list of waypoints that were already added to that particular flight
@@ -229,6 +312,7 @@ Ian Littke & 0.1 & Initial document blocking & 2017-02-21 \\ \hline
             FlightPlan.XML.Save.Success & If an attempt to save a file succeeds, the program shall display a message indicating the success. \\ \hline
           \end{tabularx}
 
+          \newpage
 \section{External Interface Requirements}
   \subsection{User Interfaces}
     \begin{tabularx}{\textwidth}{|l|X|} \hline
@@ -266,6 +350,7 @@ Ian Littke & 0.1 & Initial document blocking & 2017-02-21 \\ \hline
   \subsection{Software Quality Attributes}
 	No additional software quality attributes at this time.
 
+  \newpage
 \section{Other Requirements}
   \subsection{Key Milestones}
   \begin{tabularx}{\textwidth}{l c l}
@@ -278,21 +363,8 @@ Ian Littke & 0.1 & Initial document blocking & 2017-02-21 \\ \hline
     \textit{Release 1.0} & 12/??/2017 & Release Application to CAP \\
     \hline
   \end{tabularx}
-\appendix
-\section{Glossary} \label{sec:glossary}
-\begin{description}[style=nextline, leftmargin=10mm, topsep=0mm,noitemsep]
-      \item[CAP] \hfill \ Civilian Air Patrol
-      \item[FAA] \hfill \ Federal Aviation Administration
-      \item[Garmin G1000] \hfill \ Integratead flight instrumentation system used in planes
-      \item[GeoTIFF] \hfill \ Metadata standard which allows georeferenceing information to be embedded within a TIFF file
-      \item[GPS] \hfill \ Global Positioning System
-      \item[Sectional] \hfill \ Sectioned chart covering a section of an area
-      \item[SRS] \hfill \ Software Requirements Specification
-      \item[SD Card] \hfill \ Secure Digital Card
-      \item[TIFF] \hfill \ Tagged Image File Format
-      \item[VFR] \hfill \ Visual Flight Rules
-      \item[XML] \hfill \ eXtensible Markup Language
-  \end{description}
+\newpage
+  \appendix
 
 \section{Analysis Models}
 
