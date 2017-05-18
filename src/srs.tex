@@ -42,13 +42,18 @@
   \vspace{15mm}
   \vskip2mm
   \Huge{\textbf{\@title}}
-  \vspace{4.2cm}
+  \vspace{7cm}
+\begin{figure}[ht]
+  \begin{minipage}[b]{0.45\linewidth}
+    \includegraphics[width=.75\textwidth]{images/cios.png}
+  \end{minipage}
+  \hspace{0.5cm}
+  \begin{minipage}[b][][c]{0.45\linewidth}
+    \LARGE{\@author}
+  \vspace{0.35cm}
+  \end{minipage}
+\end{figure}
 \\CSCI 492: Spring 2017\\
-  \begin{figure}[!ht]
-    \includegraphics[scale=0.5]{cios.png}
-  \end{figure}
-
-  \@author
   \end{flushleft}\egroup
 }
 \makeatother
@@ -59,7 +64,7 @@
 Cedrick Cooke\\
 Ian Littke\\
 Owen Roth-Lerner\\
-Sander Scherman Garzon
+Sander Scherman Garzon\\
 }
 
 \begin{document}
@@ -163,30 +168,25 @@ Ian Litke & 2017-05-16 & Reformat Document & 0.3 \\ \hline
     The user shall also be expected to have lattitude-longitude coordinates of
     waypoints of interest to include in the flight plan.
   \subsection{Operating Environment}
-    \begin{tabularx}{\textwidth}{|l|X|} \hline
-      OE-1: & The Flight Plan Editor shall operate with the following operating systems:
-              Microsoft Windows 7, Microsoft Windows 8 and Microsoft Windows 10. \\ \hline
-    \end{tabularx}
+      The system will be able to run on Microsoft Windows products, starting with Windows 7.
+      The system only focuses on Windows due to the availability of Windows machines utilized by the CAP.
   \subsection{Design and Implementation Constraints}
-    \begin{tabularx}{\textwidth}{|l|X|} \hline
-      CO-1: & The system's design and code shall be written in C\#. \\ \hline
-      CO-2: & User interface shall be written in XAML for Windows Presentation Foundation.\\ \hline
-      CO-3: & All flight plans shall be recorded in XML. \\ \hline
+      The system's design and code shall be written in C\#.\\
+      User interface shall be written in XAML for Windows Presentation Foundation.\\
+      All flight plans shall be recorded in XML.\\
     \end{tabularx}
   \subsection{User Documentation}
-    \begin{tabularx}{\textwidth}{|l|X|} \hline
-      UD-1: & The system shall provide hierarchiacal and cross-linked help system in HTML that
-              describes and illustrates all system functions.\\ \hline
-      UD-2: & The system shall also offer tooltips to assist in user functions \\ \hline
-    \end{tabularx}
+      The system shall provide hierarchiacal and cross-linked help system in HTML that
+              describes and illustrates all system functions.\\ 
+      The system shall also offer tooltips to assist in user functions \\ 
   \subsection{Assumptions and Dependencies}
-    \begin{tabularx}{\textwidth}{|l|X|} \hline
-      AS-1: & Flight operators can map around restricted areas/altitude. \\ \hline
-      AS-2: & Sectional map(s) are located in the proper location. \\ \hline
-      DE-1: & Windows operating system, .NET stack. \\ \hline
-      DE-2: & SD Card supplied is of a certain make/model. \\ \hline
-      DE-3: & Flight plan is used in Garmin G1000. \\ \hline
-    \end{tabularx}
+      \subsubsection{Assumptions}    
+       Flight operators can map around restricted areas/altitude. 
+       The system will not alert the user if a flight path passes through restricted airspace or through a mountain.
+       It it remaines up to the user to be able to through these issues.
+
+       It is a dependency that the SD card used to save the flight plans on are of the same make/model that
+       is able to be read by the G1000 system.
 
     \newpage
 \section{System Features}
@@ -302,48 +302,38 @@ Ian Litke & 2017-05-16 & Reformat Document & 0.3 \\ \hline
               \item[Step 4] After writing the file completes, a message is displayed to alert the user.
             \end{description}
           \subsubsection{Functional Requirements}
-          \begin{tabularx}{\textwidth}{|l|X|} \hline
-            FlightPlan.XML.Open & The program shall let a user open files. \\ \hline
-            FlightPlan.XML.Open.Select & The program shall prompt the user to select a file to open. \\ \hline
-            FlightPlan.XML.Open.Failure & After a plan is selected to open, if it fails, the user shall be alerted to the failure. \\ \hline
-            FlightPlan.XML.Open.Success & After a plan is selected to open, if it succeeds, the user interface should automatically update to reflect the plan. \\ \hline
-            FlightPlan.XML.Save & The program shall let a user save files. \\ \hline
-            FlightPlan.XML.Save.Select & If the program cannot detect where the file was opened from,
-                or if the save-as option was used to initiate the save, the program shall prompt a user for a location to save the file. \\ \hline
-            FlightPlan.XML.Save.Failure & If an attempt to save a file fails, the user shall be alerted to the failure. \\ \hline
-            FlightPlan.XML.Save.Success & If an attempt to save a file succeeds, the program shall display a message indicating the success. \\ \hline
-          \end{tabularx}
-
+            \begin{description}
+              \item[FlightPlan.XML.Open] The program shall let a user open files. \\ 
+              \item[FlightPlan.XML.Open.Select] The program shall prompt the user to select a file to open. \\ \
+              \item[FlightPlan.XML.Open.Failure] After a plan is selected to open, if it fails, the user shall be alerted to the failure. \\ 
+              \item[FlightPlan.XML.Open.Success] After a plan is selected to open, if it succeeds, the user interface should automatically update to reflect the plan. \\ 
+              \item[FlightPlan.XML.Save] The program shall let a user save files. \\ \
+              \item[FlightPlan.XML.Save.Select] If the program cannot detect where the file was opened from,
+                         or if the save-as option was used to initiate the save, the program shall prompt a user for a location to save the file. \\
+              \item[ FlightPlan.XML.Save.Failure] If an attempt to save a file fails, the user shall be alerted to the failure. \\ 
+              \item[FlightPlan.XML.Save.Success] If an attempt to save a file succeeds, the program shall display a message indicating the success. \\ 
+            \end{description}
           \newpage
 \section{External Interface Requirements}
-  \subsection{User Interfaces}
-    \begin{tabularx}{\textwidth}{|l|X|} \hline
-      UI-1: & The UI shall have ability to input lattitude/longitude coordinates. \\ \hline
-      UI-2: & The UI shall display a chart that can be moved and arranged. \\ \hline
-      UI-3: & The UI shall have a way to load and save XML flight plan data. \\ \hline
-    \end{tabularx}
+  This section provides a description of all inputs into and outputs from the system.
+  It also gives a description of the software and communication interfaces and provides a basic prototype of the user interface.
+\subsection{User Interfaces}
+  The user interface is divided into two main sections: the map view on the right and waypoint editing on the left.
+  The user may load up previously saved flight plans or create a new plan as well as modify the current selected plan.
+  \begin{figure}[!ht]
+    \includegraphics[scale=0.5]{images/FlightPlanning_Interface.jpg}
+  \end{figure}
+  
   \subsection{Hardware Interfaces}
-    \begin{tabularx}{\textwidth}{|l|l|X|} \hline
-      HI-1: & SD card writer with SD card & Location where flight plans are saved. \\ \hline
-      HI-2: & Monitor, keyboard, and mouse & User interaction is optimized for a standard desktop. \\ \hline
-    \end{tabularx}
-
-  \subsection{Software Interfaces}
-    \begin{tabularx}{\textwidth}{|l|l|X|} \hline
-      SI-1: & Microsoft Windows 7, 8, 10 & Primary operating systems supported. \\ \hline
-      SI-2: & .NET 4.5 & Runtime environment for the application. \\ \hline
-      SI-3: & An XML library & A specific XML library will be identified at a later time.
-        This will be used to verify the correctness of files. \\ \hline
-    \end{tabularx}
-
+    There are no direct hardware interfaces, however the flight plans that are saved must be able to written to SD card.
+  
+    \subsection{Software Interfaces}
+     No software interface requirements have been identified at this time.
   \subsection{Communications Interfaces}
   No communications interfaces exist.
 
-
   \subsection{Performance Requirements}
-    \begin{tabularx}{\textwidth}{|l|X|} \hline
-      PE-1: & The UI shall refactor the tiled maps within 1 minute. \\ \hline
-    \end{tabularx}
+  The user interface should be able to render the maps within 1 minute of request from the user.
 
   \subsection{Safety Requirments}
   No safety requirements have been identified.
@@ -352,19 +342,6 @@ Ian Litke & 2017-05-16 & Reformat Document & 0.3 \\ \hline
   \subsection{Software Quality Attributes}
 	No additional software quality attributes at this time.
 
-%   \newpage
-% \section{Other Requirements}
-%   \subsection{Key Milestones}
-%   \begin{tabularx}{\textwidth}{l c l}
-%     \hline
-%     \textbf{Milestone} & \textbf{Deadline} & \textbf{Comments}\\
-%     \hline
-%     \textit{SRS Document 0.1} & 2/24/2017 & Rough SRS Due \\
-%     \textit{Vision and Scope Document 1.0} & 4/??/2017 & Vision and Scope finalization \\
-%     \textit{SRS Document 1.0} & 4/??/2017 & Initial SRS Due \\
-%     \textit{Release 1.0} & 12/??/2017 & Release Application to CAP \\
-%     \hline
-%   \end{tabularx}
 % \newpage
 %   \appendix
 %
