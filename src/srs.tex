@@ -17,20 +17,24 @@
 \newcolumntype{R}{>{\raggedleft\arraybackslash}X}%
 \fancypagestyle{style1}{
 \fancyhf{}
-\rhead{Software Requirements Specification}
-\lhead{Flight Plan Editor}
-\lfoot{v0.3}
-\rfoot{05/16/2017}
-\cfoot{\thepage}
+\lhead{Software Requirements Specification}
+\rhead{CIOS Digital}
+\lfoot{May 16, 2017}
+\rfoot{\thepage}
+
+\renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0.4pt}
 \newcolumntype{R}{>{\raggedleft\arraybackslash}X}%
 }
 \fancypagestyle{style2}{
 \fancyhf{}
-\rhead{\\}
-\lhead{\\}
-\renewcommand{\footrulewidth}{0.4pt}
-\newcolumntype{R}{>{\raggedleft\arraybackslash}X}%
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+% \rhead{\\}
+% \lhead{\\}
+\cfoot{\thepage}
+%m\renewcommand{\footrulewidth}{0.4pt}
+%\newcolumntype{R}{>{\raggedleft\arraybackslash}X}%
 }
 \pagestyle{style1}
 
@@ -72,30 +76,34 @@ Sander Scherman Garzon\\
 \maketitle
 
 \newpage
-\thispagestyle{empty}
+\pagestyle{style2}
+\setcounter{page}{1}
 \section*{Revision History}
-\begin{tabularx}{\textwidth}{|l|r|X|l|}
-  \hline
-\textbf{Name} & \textbf{Date} & \textbf{Reason for Change} & \textbf{Version} \\ \hline
-Ian Littke & 2017-02-21 & Initial document blocking & 0.1 \\ \hline
-\makecell[cl]{Cedrick Cooke,\\ Owen Roth-Lerner,\\ Sander Scherman Garzon} & 2017-02-23 & Expanded sections 3 and 4 & 0.2 \\ \hline
-Ian Litke & 2017-05-16 & Reformat Document & 0.3 \\ \hline
-          &            &                   &     \\ \hline
-          &            &                   &     \\ \hline
-          &            &                   &     \\ \hline
-          &            &                   &     \\ \hline
-          &            &                   &     \\ \hline
-          &            &                   &     \\ \hline
-          &            &                   &     \\ \hline
-          &            &                   &     \\ \hline
-          &            &                   &     \\ \hline
+\begin{tabularx}{\textwidth}{l r X l}
+\textbf{Name} & \textbf{Date} & \textbf{Reason for Change} & \textbf{Version} \\
+\hline
+\hline
+Ian Littke & 2017-02-21 & Initial document blocking & 0.1 \\
+\makecell[cl]{Cedrick Cooke,\\ Owen Roth-Lerner,\\ Sander Scherman Garzon} & 2017-02-23 & Expanded sections 3 and 4 & 0.2 \\
+Ian Litke & 2017-05-16 & Reformat Document & 0.3 \\
+          % &            &                   &     \\
+          % &            &                   &     \\
+          % &            &                   &     \\
+          % &            &                   &     \\
+          % &            &                   &     \\
+          % &            &                   &     \\
+          % &            &                   &     \\
+          % &            &                   &     \\
+          % &            &                   &     \\
+          \hline
 \end{tabularx}
 
 \newpage
-\setcounter{page}{1}
+
 \tableofcontents
 \newpage
 \pagenumbering{arabic}
+\pagestyle{style1}
 \setcounter{page}{1}
 
 \section{Introduction}
@@ -110,7 +118,7 @@ Ian Litke & 2017-05-16 & Reformat Document & 0.3 \\ \hline
   This document features some terminology which readers may be unfamiliar with.
   See \hyperref[sec:glossary]{Appendix \ref{sec:glossary} (Glossary)} for a list of these terms and their definitions.
   The format of this SRS is simple. Bold face and indentation is used on general topics and or specific points of interest.
-  The remainder of the document will be written using the standard font in \LaTeX.
+  Font style is Computer Modern and the document is typset using \LaTeX;
   \subsection{Intended Audience and Reading Suggestions}
   This document is intended for all individuals participating in the initial release of Flight Plan Editor.
   Including, but not limited to, all project team members; Aran Clauson, team mentor; and Martin Kjelstad, CAP contact point.
@@ -177,11 +185,11 @@ Ian Litke & 2017-05-16 & Reformat Document & 0.3 \\ \hline
     \end{tabularx}
   \subsection{User Documentation}
       The system shall provide hierarchiacal and cross-linked help system in HTML that
-              describes and illustrates all system functions.\\ 
-      The system shall also offer tooltips to assist in user functions \\ 
+              describes and illustrates all system functions.\\
+      The system shall also offer tooltips to assist in user functions \\
   \subsection{Assumptions and Dependencies}
-      \subsubsection{Assumptions}    
-       Flight operators can map around restricted areas/altitude. 
+      \subsubsection{Assumptions}
+       Flight operators can map around restricted areas/altitude.
        The system will not alert the user if a flight path passes through restricted airspace or through a mountain.
        It it remaines up to the user to be able to through these issues.
 
@@ -189,16 +197,44 @@ Ian Litke & 2017-05-16 & Reformat Document & 0.3 \\ \hline
        is able to be read by the G1000 system.
 
     \newpage
+
+    \subsection{Input Destination Coordinates}
+
+      \subsubsection{Description and Priority}
+  		In the top left corner of the application, there are two input windows for
+  		lattitude/longitude coordinate input. Once the user enters the data,
+  		points on the sectional map will appear as well as a text list for each
+  		coordinate.
+      \subsubsection{Stimulus/Response Sequences}
+        \begin{description}
+          \item[Stimulus] User will click on the lattitude text box to input the
+  			lattitude, and complete the same for longitude.
+        \begin{description}[0.2cm]
+  		\item[Response] Upon completion, the user will hit the enter key on their
+  			keyboard, and the map shall display the point respective
+  			to the lattitude/longitude input.
+      \end{description}
+  		\item[Stimulus] User can then request to edit an existing waypoint.
+  		\item[Response] The coordinate is displayed, and user will have the option to
+  			either save or discard the changes.
+        \end{description}
+      \subsubsection{Functional Requirements}
+      \begin{tabularx}{\textwidth}{|l|X|} \hline
+        FR-4: & There will be a text input box for both lattitude and longtitude coordinate input\\ \hline
+        FR-5: & Upon entering coordinates, a waypoint will be drawn on the sectional map to represent its location\\ \hline
+        FR-6: & Selecting an already created waypoint allows the user to modify the coordinates, or discard the waypoint\\ \hline
+        \end{tabularx}
+
 \section{System Features}
   \subsection{Display Sectional Map}
     \subsubsection{Description and Priority}
       The application will display the sectional map as the main interface.
       The map will respond to input from lattitude/longitude coordinate input as well
       as having the ability to pan around the map.
-    \subsubsection{Stimulus/Response Sequences}
+    \subsubsection{Requirements}
       \begin{description}
-        \item[Stimulus] A user can request to create a new waypoint.
-		\item[Response]	The sectional map will create a new point on the map to
+        \item[r1.1] A user can request to create a new waypoint via a textbox.
+		\item[r1.2]	The sectional map will create a new point on the map to
 			reflect the changes made.
 		\item[Stimulus] A user can also click on the map and drag their mouse
 			across the screen.
@@ -214,30 +250,7 @@ Ian Litke & 2017-05-16 & Reformat Document & 0.3 \\ \hline
       FR-3: & Map will also respond to changes in waypoints, or selecting different flight plans\\ \hline
       \end{tabularx}
 
-  \subsection{Input Destination Coordinates}
 
-    \subsubsection{Description and Priority}
-		In the top left corner of the application, there are two input windows for
-		lattitude/longitude coordinate input. Once the user enters the data,
-		points on the sectional map will appear as well as a text list for each
-		coordinate. Priority = high.
-    \subsubsection{Stimulus/Response Sequences}
-      \begin{description}
-        \item[Stimulus] User will click on the lattitude text box to input the
-			lattitude, and complete the same for longitude.
-		\item[Response] Upon completion, the user will hit the enter key on their
-			keyboard, and the map shall display the point respective
-			to the lattitude/longitude input.
-		\item[Stimulus] User can then request to edit an existing waypoint.
-		\item[Response] The coordinate is displayed, and user will have the option to
-			either save or discard the changes.
-      \end{description}
-    \subsubsection{Functional Requirements}
-    \begin{tabularx}{\textwidth}{|l|X|} \hline
-      FR-4: & There will be a text input box for both lattitude and longtitude coordinate input\\ \hline
-      FR-5: & Upon entering coordinates, a waypoint will be drawn on the sectional map to represent its location\\ \hline
-      FR-6: & Selecting an already created waypoint allows the user to modify the coordinates, or discard the waypoint\\ \hline
-      \end{tabularx}
 
     \subsection{Distinguish Waypoint Coordinates}
       \subsubsection{Description and Priority}
@@ -303,15 +316,15 @@ Ian Litke & 2017-05-16 & Reformat Document & 0.3 \\ \hline
             \end{description}
           \subsubsection{Functional Requirements}
             \begin{description}
-              \item[FlightPlan.XML.Open] The program shall let a user open files. \\ 
+              \item[FlightPlan.XML.Open] The program shall let a user open files. \\
               \item[FlightPlan.XML.Open.Select] The program shall prompt the user to select a file to open. \\ \
-              \item[FlightPlan.XML.Open.Failure] After a plan is selected to open, if it fails, the user shall be alerted to the failure. \\ 
-              \item[FlightPlan.XML.Open.Success] After a plan is selected to open, if it succeeds, the user interface should automatically update to reflect the plan. \\ 
+              \item[FlightPlan.XML.Open.Failure] After a plan is selected to open, if it fails, the user shall be alerted to the failure. \\
+              \item[FlightPlan.XML.Open.Success] After a plan is selected to open, if it succeeds, the user interface should automatically update to reflect the plan. \\
               \item[FlightPlan.XML.Save] The program shall let a user save files. \\ \
               \item[FlightPlan.XML.Save.Select] If the program cannot detect where the file was opened from,
                          or if the save-as option was used to initiate the save, the program shall prompt a user for a location to save the file. \\
-              \item[ FlightPlan.XML.Save.Failure] If an attempt to save a file fails, the user shall be alerted to the failure. \\ 
-              \item[FlightPlan.XML.Save.Success] If an attempt to save a file succeeds, the program shall display a message indicating the success. \\ 
+              \item[ FlightPlan.XML.Save.Failure] If an attempt to save a file fails, the user shall be alerted to the failure. \\
+              \item[FlightPlan.XML.Save.Success] If an attempt to save a file succeeds, the program shall display a message indicating the success. \\
             \end{description}
           \newpage
 \section{External Interface Requirements}
@@ -323,10 +336,10 @@ Ian Litke & 2017-05-16 & Reformat Document & 0.3 \\ \hline
   \begin{figure}[!ht]
     \includegraphics[scale=0.5]{images/FlightPlanning_Interface.jpg}
   \end{figure}
-  
+
   \subsection{Hardware Interfaces}
     There are no direct hardware interfaces, however the flight plans that are saved must be able to written to SD card.
-  
+
     \subsection{Software Interfaces}
      No software interface requirements have been identified at this time.
   \subsection{Communications Interfaces}
