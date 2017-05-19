@@ -197,6 +197,7 @@ Ian Litke & 2017-05-16 & Reformat Document & 0.3 \\
        is able to be read by the G1000 system.
 
     \newpage
+\section{System Features}
 
     \subsection{Input Destination Coordinates}
 
@@ -210,22 +211,21 @@ Ian Litke & 2017-05-16 & Reformat Document & 0.3 \\
           \item[Stimulus] User will click on the lattitude text box to input the
   			lattitude, and complete the same for longitude.
         \begin{description}[0.2cm]
-  		\item[Response] Upon completion, the user will hit the enter key on their
-  			keyboard, and the map shall display the point respective
+  		\item[Response] The map shall display the point respective
   			to the lattitude/longitude input.
       \end{description}
   		\item[Stimulus] User can then request to edit an existing waypoint.
-  		\item[Response] The coordinate is displayed, and user will have the option to
+        \begin{description}[0.2cm]
+          \item[Response] The coordinate is displayed, and user will have the option to
   			either save or discard the changes.
         \end{description}
+    \end{description}
       \subsubsection{Functional Requirements}
-      \begin{tabularx}{\textwidth}{|l|X|} \hline
-        FR-4: & There will be a text input box for both lattitude and longtitude coordinate input\\ \hline
-        FR-5: & Upon entering coordinates, a waypoint will be drawn on the sectional map to represent its location\\ \hline
-        FR-6: & Selecting an already created waypoint allows the user to modify the coordinates, or discard the waypoint\\ \hline
-        \end{tabularx}
-
-\section{System Features}
+        \begin{description}
+          \item[r1.1] \hfill \\ There will be a text input box for both lattitude and longtitude coordinate input\\ 
+          \item[r1.2] \hfill \\ Upon entering coordinates, a waypoint will be drawn on the sectional map to represent its location\\ 
+          \item[r1.3] \hfill \\ Selecting an already created waypoint allows the user to modify the coordinates, or discard the waypoint\\ 
+        \end{description}
   \subsection{Display Sectional Map}
     \subsubsection{Description and Priority}
       The application will display the sectional map as the main interface.
@@ -233,70 +233,68 @@ Ian Litke & 2017-05-16 & Reformat Document & 0.3 \\
       as having the ability to pan around the map.
     \subsubsection{Requirements}
       \begin{description}
-        \item[r1.1] A user can request to create a new waypoint via a textbox.
-		\item[r1.2]	The sectional map will create a new point on the map to
-			reflect the changes made.
-		\item[Stimulus] A user can also click on the map and drag their mouse
-			across the screen.
-    \item[Response] The program will adjust the view of the map vertically and horizontally,
-			in the opposite direction of the mouse pointers movement.
-		\item[Stimulus] A user may also scroll with the mousewheel.
-		\item[Response] The map will either zoom in or zoom out depending on the mouse scroll.
+          \paragraph{Click map to add map waypoint}
+        \item[Step 1] A user can click on the map to input a waypoint at that coordinate.
+        \item[Step 2] A new waypoint is displayed on the map.
+          \paragraph{Pan map}
+        \item[Step 1] A user can click-hold on the map and drag their mouse across the screen.
+        \item[Step 2] The program will adjust the view of the map vertically and horizontally,
+			                  in the opposite direction of the mouse pointers movement.
+        \paragraph{Zoom map}
+        \item[Step 1] A user may also scroll with the mousewheel.
+        \item[Step 2] The map will either zoom in or zoom out depending on the mouse scroll.
       \end{description}
     \subsubsection{Functional Requirements}
-    \begin{tabularx}{\textwidth}{|l|X|} \hline
-      FR-1: & Upon starting the program, the sectional map will be displayed\\ \hline
-      FR-2: & This map will have the ability to maneuver and pan based upon user mouse movement\\ \hline
-      FR-3: & Map will also respond to changes in waypoints, or selecting different flight plans\\ \hline
-      \end{tabularx}
-
-
+    \begin{description}
+      \item[r2.1] \hfill \\ Upon starting the program, the sectional map will be displayed\\
+      \item[r2.2] \hfill \\  This map will have the ability to maneuver and pan based upon user mouse movement\\
+      \item[r2.3] \hfill \\  Map will also respond to changes in waypoints, or selecting different flight plans\\
+  \end{description}
 
     \subsection{Distinguish Waypoint Coordinates}
       \subsubsection{Description and Priority}
 		As a user inputs more lattitude/longitude coordinates, the program will
 	    draw a new waypoint onto the sectional map for viewing as well
 		as having a small subtext containing the lattitude/longitude coordinates
-		for viewing to distinguish each waypoint. Priority = medium.
+    for viewing to distinguish each waypoint.
       \subsubsection{Stimulus/Response Sequences}
         \begin{description}
-          \item[Stimulus] A user can request to view the listed waypoints on the map.
-		  \item[Response] The program will display the lattitude/longitude data
-			for that given point on the sectional map, as well as highlight the
-			list of waypoints that were already added to that particular flight
-			plan.
+          \item[Step 1] A user adds/removes a waypoint
+          \item[Step 2] The map is updated to show the change in waypoints
+  \end{description}
         \end{description}
       \subsubsection{Functional Requirements}
-      \begin{tabularx}{\textwidth}{|l|X|} \hline
-        FR-7: & Each waypoint drawn on the map shall display the lattitude and longitude coordinates\\ \hline
-        FR-8: & Each waypoint will also be displayed as a list between other points for connections\\ \hline
-        \end{tabularx}
-
+      \begin{description}
+        \item[r3.1] \hfill \\ Each waypoint drawn on the map shall display the lattitude and longitude coordinates\\ 
+        \item[r3.2] \hfill \\  Each waypoint will also be displayed as a list between other points for connections\\ 
+    \end{description}
 
       \subsection{Draw Flight Path on Section Map Between Coordinates}
         \subsubsection{Description and Priority}
         		The user should have the ability to not only add or delete points, but change in which
         		order he connects one point to another. This allows the user to actually route between
-        		points rather than have to manually navigate between them. (Priority = High)
-        \subsubsection{Stimulus/Response Sequences}
-            Upon selection/editing a flight plan, the program will pull up a list of previous flight
-            points and the path between them on a map. These points will be pathed in the order the
-            appear on the list, and changing the order will change what point each point connects to.
-            The user will be able to see this editing of order (and thereby flight path) automatically
-            on the map.
+            points rather than have to manually navigate between them.
+        \subsubsection{Use-Case Sequences}
+          \begin{description}
+              \paragraph{New waypoint}
+            \item[Step 1] User adds a new waypoint
+            \item[Step 2] Map updates to create a path from the previous waypoint to new waypoint
+              \paragraph{Remove waypoint}
+            \item[Step 1] User removes a waypoint
+            \item[Step 2] Map updates to remove the path from the waypoints
+          \end{description}
         \subsubsection{Functional Requirements}
-          \begin{tabularx}{\textwidth}{|l|X|} \hline
-            FR-9: & The point list shall have ability to edit ordering of lat/long coordinates\\ \hline
-            FR-10: & If adding new lat/long coordinates, the previous coord will connect to new one.\\ \hline
-            FR-11: & If coordinate is last on list, the path will end there.\\ \hline
-      	    FR-12: & The map shall update to show new path as the list is edited/extended.\\ \hline
-          \end{tabularx}
+        \begin{description}
+            \item[r4.1] \hfill \\ The point list shall have ability to edit ordering of lat/long coordinates\\ 
+            \item[r4.2] \hfill \\ If adding new lat/long coordinates, the previous coord will connect to new one\\ 
+            \item[r4.3] \hfill \\ If coordinate is last on list, the path will end there\\ 
+      	    \item[r4.4] \hfill \\  The map shall update to show new path as the list is edited/extended\\ 
+          \end{description}
         \subsection{Open and Save Flight Plan in XML to SD Card}
           \subsubsection{Description and Priority}
             The Garmin G1000 uses SD cards to store flight plans, and does so in the XML format.
             For this program to be of any use, it \emph{must} support reading and writing these files.
-            Priority = High
-          \subsubsection{Stimulus/Response Sequences}
+          \subsubsection{Use-Case Sequences}
             \paragraph{Opening a file:}
             \begin{description}
               \item[Step 1] User initiates an open action.
@@ -316,15 +314,15 @@ Ian Litke & 2017-05-16 & Reformat Document & 0.3 \\
             \end{description}
           \subsubsection{Functional Requirements}
             \begin{description}
-              \item[FlightPlan.XML.Open] The program shall let a user open files. \\
-              \item[FlightPlan.XML.Open.Select] The program shall prompt the user to select a file to open. \\ \
-              \item[FlightPlan.XML.Open.Failure] After a plan is selected to open, if it fails, the user shall be alerted to the failure. \\
-              \item[FlightPlan.XML.Open.Success] After a plan is selected to open, if it succeeds, the user interface should automatically update to reflect the plan. \\
-              \item[FlightPlan.XML.Save] The program shall let a user save files. \\ \
-              \item[FlightPlan.XML.Save.Select] If the program cannot detect where the file was opened from,
+              \item[r5.1.1] The program shall let a user open files. \\
+              \item[r5.1.2] The program shall prompt the user to select a file to open. \\ \
+              \item[r5.1.3] After a plan is selected to open, if it fails, the user shall be alerted to the failure. \\
+              \item[r5.1.4] After a plan is selected to open, if it succeeds, the user interface should automatically update to reflect the plan. \\
+              \item[r5.2.1] The program shall let a user save files. \\ \
+              \item[r5.2.2] If the program cannot detect where the file was opened from,
                          or if the save-as option was used to initiate the save, the program shall prompt a user for a location to save the file. \\
-              \item[ FlightPlan.XML.Save.Failure] If an attempt to save a file fails, the user shall be alerted to the failure. \\
-              \item[FlightPlan.XML.Save.Success] If an attempt to save a file succeeds, the program shall display a message indicating the success. \\
+              \item[r5.2.3] If an attempt to save a file fails, the user shall be alerted to the failure. \\
+              \item[r5.2.4] If an attempt to save a file succeeds, the program shall display a message indicating the success. \\
             \end{description}
           \newpage
 \section{External Interface Requirements}
