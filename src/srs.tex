@@ -148,7 +148,7 @@ Ian Litke & 2017-05-16 & Reformat Document & 0.3 \\
   \subsection{References}\label{sec:ref}
   \begin{tabularx}{\textwidth}{l|X}
     \hline
-    Vision and Scope & \url{https://github.com/CIOS-Digital/vision-scopedd}\\
+    Vision and Scope & \url{https://github.com/CIOS-Digital/vision-scope}\\
     FAA VFR Raster Charts & \url{https://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/vfr/} \\
     \hline
   \end{tabularx}
@@ -174,7 +174,7 @@ Ian Litke & 2017-05-16 & Reformat Document & 0.3 \\
     In the case of the Bellingham CAP, this is limited to two people.
     The user is expected to have knowledge of flying area and can read charts.
     The user shall also be expected to have latitude-longitude coordinates of
-    way-points of interest to include in the flight plan.
+    waypoints of interest to include in the flight plan.
   \subsection{Operating Environment}
       The system will be able to run on Microsoft Windows products, starting with Windows 7.
       The system only focuses on Windows due to the availability of Windows machines utilized by the CAP.
@@ -206,22 +206,22 @@ Ian Litke & 2017-05-16 & Reformat Document & 0.3 \\
   		points on the sectional map will appear as well as a text list for each
   		coordinate.
       \subsubsection{Use-Case Sequences}
-      \paragraph{New way-point}
+      \paragraph{New waypoint}
         \begin{description}
           \item[Step 1] User will click on the latitude text box to input the
   			latitude, and complete the same for longitude.
   		\item[Step 2] The map shall display the point respective to the latitude-longitude input.
       \end{description}
-      \paragraph{Modify Way-point}
-  		\item[Step 1] User can then request to edit an existing way-point.
+      \paragraph{Modify waypoint}
+  		\item[Step 1] User can then request to edit an existing waypoint.
       \item[Step 2] The coordinate is displayed, and user will have the option to
   			either save or discard the changes.
     \end{description}
       \subsubsection{Functional Requirements}
         \begin{description}
           \item[r1.1] \hfill \\ There will be a text input box for both latitude and longitude coordinate input\\
-          \item[r1.2] \hfill \\ Upon entering coordinates, a way-point will be drawn on the sectional map to represent its location\\
-          \item[r1.3] \hfill \\ Selecting an already created way-point allows the user to modify the coordinates, or discard the way-point\\
+          \item[r1.2] \hfill \\ Upon entering coordinates, a waypoint will be drawn on the sectional map to represent its location\\
+          \item[r1.3] \hfill \\ Selecting an already created waypoint allows the user to modify the coordinates, or discard the waypoint\\
         \end{description}
   \subsection{Display Sectional Map}
     \subsubsection{Description and Priority}
@@ -229,11 +229,11 @@ Ian Litke & 2017-05-16 & Reformat Document & 0.3 \\
       The map will respond to input from latitude-longitude coordinate input as well
       as having the ability to pan around the map.
     \subsubsection{Requirements}
-    \paragraph{Click map to add map way-point}
+    \paragraph{Click map to add map waypoint}
       \begin{description}
 
-        \item[Step 1] A user can click on the map to input a way-point at that coordinate.
-        \item[Step 2] A new way-point is displayed on the map.
+        \item[Step 1] A user can click on the map to input a waypoint at that coordinate.
+        \item[Step 2] A new waypoint is displayed on the map.
       \end{description}
           \paragraph{Pan map}
           \begin{description}
@@ -250,25 +250,25 @@ Ian Litke & 2017-05-16 & Reformat Document & 0.3 \\
     \begin{description}
       \item[r2.1] \hfill \\ Upon starting the program, the sectional map will be displayed\\
       \item[r2.2] \hfill \\  This map will have the ability to maneuver and pan based upon user mouse movement\\
-      \item[r2.3] \hfill \\  Map will also respond to changes in way-points, or selecting different flight plans\\
+      \item[r2.3] \hfill \\  Map will also respond to changes in waypoints, or selecting different flight plans\\
   \end{description}
 
-    \subsection{Distinguish Way-point Coordinates}
+    \subsection{Distinguish waypoint Coordinates}
       \subsubsection{Description and Priority}
 		As a user inputs more latitude-longitude coordinates, the program will
-	    draw a new way-point onto the sectional map for viewing as well
+	    draw a new waypoint onto the sectional map for viewing as well
 		as having a small subtext containing the latitude-longitude coordinates
-    for viewing to distinguish each way-point.
+    for viewing to distinguish each waypoint.
       \subsubsection{Use-Case Sequences}
         \begin{description}
-          \item[Step 1] A user adds or removes a way-point
-          \item[Step 2] The map is updated to show the change in way-points
+          \item[Step 1] A user adds or removes a waypoint
+          \item[Step 2] The map is updated to show the change in waypoints
   \end{description}
         \end{description}
       \subsubsection{Functional Requirements}
       \begin{description}
-        \item[r3.1] \hfill \\ Each way-point drawn on the map shall display the latitude and longitude coordinates\\
-        \item[r3.2] \hfill \\  Each way-point will also be displayed as a list between other points for connections\\
+        \item[r3.1] \hfill \\ Each waypoint drawn on the map shall display the latitude and longitude coordinates\\
+        \item[r3.2] \hfill \\  Each waypoint will also be displayed as a list between other points for connections\\
     \end{description}
 
       \subsection{Draw Flight Path on Section Map Between Coordinates}
@@ -277,16 +277,16 @@ Ian Litke & 2017-05-16 & Reformat Document & 0.3 \\
         		order he connects one point to another. This allows the user to actually route between
             points rather than have to manually navigate between them.
         \subsubsection{Use-Case Sequences}
-        \paragraph{New way-point}
+        \paragraph{New waypoint}
           \begin{description}
 
-            \item[Step 1] User adds a new way-point \\
-            \item[Step 2] Map updates to create a path from the previous way-point to new way-point\\
+            \item[Step 1] User adds a new waypoint \\
+            \item[Step 2] Map updates to create a path from the previous waypoint to new waypoint\\
           \end{description}
-              \paragraph{Remove way-point}
+              \paragraph{Remove waypoint}
               \begin{description}
-                \item[Step 1] User removes a way-point\\
-            \item[Step 2] Map updates to remove the path from the way-points\\
+                \item[Step 1] User removes a waypoint\\
+            \item[Step 2] Map updates to remove the path from the waypoints\\
           \end{description}
         \subsubsection{Functional Requirements}
         \begin{description}
@@ -334,7 +334,7 @@ Ian Litke & 2017-05-16 & Reformat Document & 0.3 \\
   This section provides a description of all inputs into and outputs from the system.
   It also gives a description of the software and communication interfaces and provides a basic prototype of the user interface.
 \subsection{User Interfaces}
-  The user interface is divided into two main sections: the map view on the right and way-point editing on the left.
+  The user interface is divided into two main sections: the map view on the right and waypoint editing on the left.
   The user may load up previously saved flight plans or create a new plan as well as modify the current selected plan.
   See figure \ref{fig:ui} for a sample mockup interface.
   \begin{figure}[!ht]
