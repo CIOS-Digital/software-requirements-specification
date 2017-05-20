@@ -17,20 +17,24 @@
 \newcolumntype{R}{>{\raggedleft\arraybackslash}X}%
 \fancypagestyle{style1}{
 \fancyhf{}
-\rhead{Software Requirements Specification}
-\lhead{Flight Plan Editor}
-\lfoot{v0.3}
-\rfoot{05/16/2017}
-\cfoot{\thepage}
+\lhead{Software Requirements Specification}
+\rhead{CIOS Digital}
+\lfoot{May 16, 2017}
+\rfoot{\thepage}
+
+\renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0.4pt}
 \newcolumntype{R}{>{\raggedleft\arraybackslash}X}%
 }
 \fancypagestyle{style2}{
 \fancyhf{}
-\rhead{\\}
-\lhead{\\}
-\renewcommand{\footrulewidth}{0.4pt}
-\newcolumntype{R}{>{\raggedleft\arraybackslash}X}%
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+% \rhead{\\}
+% \lhead{\\}
+\cfoot{\thepage}
+%m\renewcommand{\footrulewidth}{0.4pt}
+%\newcolumntype{R}{>{\raggedleft\arraybackslash}X}%
 }
 \pagestyle{style1}
 
@@ -72,35 +76,39 @@ Sander Scherman Garzon\\
 \maketitle
 
 \newpage
-\thispagestyle{empty}
+\pagestyle{style2}
+\setcounter{page}{1}
 \section*{Revision History}
-\begin{tabularx}{\textwidth}{|l|r|X|l|}
-  \hline
-\textbf{Name} & \textbf{Date} & \textbf{Reason for Change} & \textbf{Version} \\ \hline
-Ian Littke & 2017-02-21 & Initial document blocking & 0.1 \\ \hline
-\makecell[cl]{Cedrick Cooke,\\ Owen Roth-Lerner,\\ Sander Scherman Garzon} & 2017-02-23 & Expanded sections 3 and 4 & 0.2 \\ \hline
-Ian Litke & 2017-05-16 & Reformat Document & 0.3 \\ \hline
-          &            &                   &     \\ \hline
-          &            &                   &     \\ \hline
-          &            &                   &     \\ \hline
-          &            &                   &     \\ \hline
-          &            &                   &     \\ \hline
-          &            &                   &     \\ \hline
-          &            &                   &     \\ \hline
-          &            &                   &     \\ \hline
-          &            &                   &     \\ \hline
+\begin{tabularx}{\textwidth}{l r X l}
+\textbf{Name} & \textbf{Date} & \textbf{Reason for Change} & \textbf{Version} \\
+\hline
+\hline
+Ian Littke & 2017-02-21 & Initial document blocking & 0.1 \\
+\makecell[cl]{Cedrick Cooke,\\ Owen Roth-Lerner,\\ Sander Scherman Garzon} & 2017-02-23 & Expanded sections 3 and 4 & 0.2 \\
+Ian Litke & 2017-05-16 & Reformat Document & 0.3 \\
+          % &            &                   &     \\
+          % &            &                   &     \\
+          % &            &                   &     \\
+          % &            &                   &     \\
+          % &            &                   &     \\
+          % &            &                   &     \\
+          % &            &                   &     \\
+          % &            &                   &     \\
+          % &            &                   &     \\
+          \hline
 \end{tabularx}
 
 \newpage
-\setcounter{page}{1}
+
 \tableofcontents
 \newpage
 \pagenumbering{arabic}
+\pagestyle{style1}
 \setcounter{page}{1}
 
 \section{Introduction}
   \subsection{Purpose}
-    This SRS describes the software functional and nonfunctional requirements
+    This SRS (Software Requirements Specification) describes the software functional and nonfunctional requirements
     for release 1.0 of the Flight Plan Editor.
     This document is intended to be used by the members of the project team that will implement
     and verify the correct functioning of the system.
@@ -108,12 +116,12 @@ Ian Litke & 2017-05-16 & Reformat Document & 0.3 \\ \hline
     and committed for release 1.0.
   \subsection{Document Conventions}
   This document features some terminology which readers may be unfamiliar with.
-  See \hyperref[sec:glossary]{Appendix \ref{sec:glossary} (Glossary)} for a list of these terms and their definitions.
+  See section \hyperref[sec:glossary]{\ref{sec:glossary}} for a list of these terms and their definitions.
   The format of this SRS is simple. Bold face and indentation is used on general topics and or specific points of interest.
-  The remainder of the document will be written using the standard font in \LaTeX.
+  Font style is Computer Modern and the document is typeset using \LaTeX;
   \subsection{Intended Audience and Reading Suggestions}
   This document is intended for all individuals participating in the initial release of Flight Plan Editor.
-  Including, but not limited to, all project team members; Aran Clauson, team mentor; and Martin Kjelstad, CAP contact point.
+  Including, but not limited to, all project team members; our team mentor; and our CAP contact point.
 
   \subsection{Project Scope}
   The Flight Planning Editor will allow flight planners in the Civilian Air Patrol (CAP)
@@ -126,7 +134,7 @@ Ian Litke & 2017-05-16 & Reformat Document & 0.3 \\ \hline
 \begin{description}[style=nextline, leftmargin=10mm, topsep=0mm,noitemsep]
       \item[CAP] \hfill \ Civilian Air Patrol
       \item[FAA] \hfill \ Federal Aviation Administration
-      \item[Garmin G1000] \hfill \ Integratead flight instrumentation system used in planes
+      \item[Garmin G1000] \hfill \ Integrated flight instrumentation system used in planes
       \item[GeoTIFF] \hfill \ Metadata standard which allows georeferenceing information to be embedded within a TIFF file
       \item[GPS] \hfill \ Global Positioning System
       \item[Sectional] \hfill \ Sectioned chart covering a section of an area, usually by state
@@ -140,7 +148,7 @@ Ian Litke & 2017-05-16 & Reformat Document & 0.3 \\ \hline
   \subsection{References}\label{sec:ref}
   \begin{tabularx}{\textwidth}{l|X}
     \hline
-    Vision and Scope & \url{https://github.com/cedrickcooke/flight-planning/tree/master/vision-scope}\\
+    Vision and Scope & \url{https://github.com/CIOS-Digital/vision-scopedd}\\
     FAA VFR Raster Charts & \url{https://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/vfr/} \\
     \hline
   \end{tabularx}
@@ -152,7 +160,7 @@ Ian Litke & 2017-05-16 & Reformat Document & 0.3 \\ \hline
   requirements specification in the next section.
   \subsection{Product Perspective}
     This flight planning editor addresses a CAP emergency flight planning need.
-    Specifically, this new software whill allow a user to input latitude and longitude coordinates
+    Specifically, this new software will allow a user to input latitude and longitude coordinates
     and view them on a map to develop flight plans.
     These flight plans can then be used in the Garmin G1000 navigation system.
   \subsection{Product Features}
@@ -165,125 +173,133 @@ Ian Litke & 2017-05-16 & Reformat Document & 0.3 \\ \hline
     users that have the authority to create flight-plans.
     In the case of the Bellingham CAP, this is limited to two people.
     The user is expected to have knowledge of flying area and can read charts.
-    The user shall also be expected to have lattitude-longitude coordinates of
-    waypoints of interest to include in the flight plan.
+    The user shall also be expected to have latitude-longitude coordinates of
+    way-points of interest to include in the flight plan.
   \subsection{Operating Environment}
       The system will be able to run on Microsoft Windows products, starting with Windows 7.
       The system only focuses on Windows due to the availability of Windows machines utilized by the CAP.
   \subsection{Design and Implementation Constraints}
-      The system's design and code shall be written in C\#.\\
-      User interface shall be written in XAML for Windows Presentation Foundation.\\
+      The system's design and code shall be written in C\# The User interface shall be written in XAML for Windows Presentation Foundation.
       All flight plans shall be recorded in XML.\\
     \end{tabularx}
   \subsection{User Documentation}
-      The system shall provide hierarchiacal and cross-linked help system in HTML that
-              describes and illustrates all system functions.\\ 
-      The system shall also offer tooltips to assist in user functions \\ 
+      The system shall provide hierarchical and cross-linked help system in HTML that
+              describes and illustrates all system functions.\\
+      The system shall also offer tool-tips to assist in user functions \\
   \subsection{Assumptions and Dependencies}
-      \subsubsection{Assumptions}    
-       Flight operators can map around restricted areas/altitude. 
+      \subsubsection{Assumptions}
+       Flight operators can map around restricted areas and or altitude.
        The system will not alert the user if a flight path passes through restricted airspace or through a mountain.
-       It it remaines up to the user to be able to through these issues.
+       It remains up to the user to be able to through these issues.
 
-       It is a dependency that the SD card used to save the flight plans on are of the same make/model that
+       It is a dependency that the SD card used to save the flight plans on are of the same make and model that
        is able to be read by the G1000 system.
 
     \newpage
 \section{System Features}
+
+    \subsection{Input Destination Coordinates}
+
+      \subsubsection{Description and Priority}
+  		In the top left corner of the application, there are two input windows for
+  		latitude-longitude coordinate input. Once the user enters the data,
+  		points on the sectional map will appear as well as a text list for each
+  		coordinate.
+      \subsubsection{Use-Case Sequences}
+      \paragraph{New way-point}
+        \begin{description}
+          \item[Step 1] User will click on the latitude text box to input the
+  			latitude, and complete the same for longitude.
+  		\item[Step 2] The map shall display the point respective to the latitude-longitude input.
+      \end{description}
+      \paragraph{Modify Way-point}
+  		\item[Step 1] User can then request to edit an existing way-point.
+      \item[Step 2] The coordinate is displayed, and user will have the option to
+  			either save or discard the changes.
+    \end{description}
+      \subsubsection{Functional Requirements}
+        \begin{description}
+          \item[r1.1] \hfill \\ There will be a text input box for both latitude and longitude coordinate input\\
+          \item[r1.2] \hfill \\ Upon entering coordinates, a way-point will be drawn on the sectional map to represent its location\\
+          \item[r1.3] \hfill \\ Selecting an already created way-point allows the user to modify the coordinates, or discard the way-point\\
+        \end{description}
   \subsection{Display Sectional Map}
     \subsubsection{Description and Priority}
       The application will display the sectional map as the main interface.
-      The map will respond to input from lattitude/longitude coordinate input as well
+      The map will respond to input from latitude-longitude coordinate input as well
       as having the ability to pan around the map.
-    \subsubsection{Stimulus/Response Sequences}
+    \subsubsection{Requirements}
+    \paragraph{Click map to add map way-point}
       \begin{description}
-        \item[Stimulus] A user can request to create a new waypoint.
-		\item[Response]	The sectional map will create a new point on the map to
-			reflect the changes made.
-		\item[Stimulus] A user can also click on the map and drag their mouse
-			across the screen.
-    \item[Response] The program will adjust the view of the map vertically and horizontally,
-			in the opposite direction of the mouse pointers movement.
-		\item[Stimulus] A user may also scroll with the mousewheel.
-		\item[Response] The map will either zoom in or zoom out depending on the mouse scroll.
+
+        \item[Step 1] A user can click on the map to input a way-point at that coordinate.
+        \item[Step 2] A new way-point is displayed on the map.
       \end{description}
-    \subsubsection{Functional Requirements}
-    \begin{tabularx}{\textwidth}{|l|X|} \hline
-      FR-1: & Upon starting the program, the sectional map will be displayed\\ \hline
-      FR-2: & This map will have the ability to maneuver and pan based upon user mouse movement\\ \hline
-      FR-3: & Map will also respond to changes in waypoints, or selecting different flight plans\\ \hline
-      \end{tabularx}
-
-  \subsection{Input Destination Coordinates}
-
-    \subsubsection{Description and Priority}
-		In the top left corner of the application, there are two input windows for
-		lattitude/longitude coordinate input. Once the user enters the data,
-		points on the sectional map will appear as well as a text list for each
-		coordinate. Priority = high.
-    \subsubsection{Stimulus/Response Sequences}
-      \begin{description}
-        \item[Stimulus] User will click on the lattitude text box to input the
-			lattitude, and complete the same for longitude.
-		\item[Response] Upon completion, the user will hit the enter key on their
-			keyboard, and the map shall display the point respective
-			to the lattitude/longitude input.
-		\item[Stimulus] User can then request to edit an existing waypoint.
-		\item[Response] The coordinate is displayed, and user will have the option to
-			either save or discard the changes.
-      \end{description}
-    \subsubsection{Functional Requirements}
-    \begin{tabularx}{\textwidth}{|l|X|} \hline
-      FR-4: & There will be a text input box for both lattitude and longtitude coordinate input\\ \hline
-      FR-5: & Upon entering coordinates, a waypoint will be drawn on the sectional map to represent its location\\ \hline
-      FR-6: & Selecting an already created waypoint allows the user to modify the coordinates, or discard the waypoint\\ \hline
-      \end{tabularx}
-
-    \subsection{Distinguish Waypoint Coordinates}
-      \subsubsection{Description and Priority}
-		As a user inputs more lattitude/longitude coordinates, the program will
-	    draw a new waypoint onto the sectional map for viewing as well
-		as having a small subtext containing the lattitude/longitude coordinates
-		for viewing to distinguish each waypoint. Priority = medium.
-      \subsubsection{Stimulus/Response Sequences}
+          \paragraph{Pan map}
+          \begin{description}
+        \item[Step 1] A user can click-hold on the map and drag their mouse across the screen.
+        \item[Step 2] The program will adjust the view of the map vertically and horizontally,
+			                  in the opposite direction of the mouse pointers movement.
+        \end{description}
+        \paragraph{Zoom map}
         \begin{description}
-          \item[Stimulus] A user can request to view the listed waypoints on the map.
-		  \item[Response] The program will display the lattitude/longitude data
-			for that given point on the sectional map, as well as highlight the
-			list of waypoints that were already added to that particular flight
-			plan.
+        \item[Step 1] A user may also scroll with the mouse-wheel.
+        \item[Step 2] The map will either zoom in or zoom out depending on the mouse scroll.
+      \end{description}
+    \subsubsection{Functional Requirements}
+    \begin{description}
+      \item[r2.1] \hfill \\ Upon starting the program, the sectional map will be displayed\\
+      \item[r2.2] \hfill \\  This map will have the ability to maneuver and pan based upon user mouse movement\\
+      \item[r2.3] \hfill \\  Map will also respond to changes in way-points, or selecting different flight plans\\
+  \end{description}
+
+    \subsection{Distinguish Way-point Coordinates}
+      \subsubsection{Description and Priority}
+		As a user inputs more latitude-longitude coordinates, the program will
+	    draw a new way-point onto the sectional map for viewing as well
+		as having a small subtext containing the latitude-longitude coordinates
+    for viewing to distinguish each way-point.
+      \subsubsection{Use-Case Sequences}
+        \begin{description}
+          \item[Step 1] A user adds or removes a way-point
+          \item[Step 2] The map is updated to show the change in way-points
+  \end{description}
         \end{description}
       \subsubsection{Functional Requirements}
-      \begin{tabularx}{\textwidth}{|l|X|} \hline
-        FR-7: & Each waypoint drawn on the map shall display the lattitude and longitude coordinates\\ \hline
-        FR-8: & Each waypoint will also be displayed as a list between other points for connections\\ \hline
-        \end{tabularx}
-
+      \begin{description}
+        \item[r3.1] \hfill \\ Each way-point drawn on the map shall display the latitude and longitude coordinates\\
+        \item[r3.2] \hfill \\  Each way-point will also be displayed as a list between other points for connections\\
+    \end{description}
 
       \subsection{Draw Flight Path on Section Map Between Coordinates}
         \subsubsection{Description and Priority}
         		The user should have the ability to not only add or delete points, but change in which
         		order he connects one point to another. This allows the user to actually route between
-        		points rather than have to manually navigate between them. (Priority = High)
-        \subsubsection{Stimulus/Response Sequences}
-            Upon selection/editing a flight plan, the program will pull up a list of previous flight
-            points and the path between them on a map. These points will be pathed in the order the
-            appear on the list, and changing the order will change what point each point connects to.
-            The user will be able to see this editing of order (and thereby flight path) automatically
-            on the map.
+            points rather than have to manually navigate between them.
+        \subsubsection{Use-Case Sequences}
+        \paragraph{New way-point}
+          \begin{description}
+
+            \item[Step 1] User adds a new way-point \\
+            \item[Step 2] Map updates to create a path from the previous way-point to new way-point\\
+          \end{description}
+              \paragraph{Remove way-point}
+              \begin{description}
+                \item[Step 1] User removes a way-point\\
+            \item[Step 2] Map updates to remove the path from the way-points\\
+          \end{description}
         \subsubsection{Functional Requirements}
-          \begin{tabularx}{\textwidth}{|l|X|} \hline
-            FR-9: & The point list shall have ability to edit ordering of lat/long coordinates\\ \hline
-            FR-10: & If adding new lat/long coordinates, the previous coord will connect to new one.\\ \hline
-            FR-11: & If coordinate is last on list, the path will end there.\\ \hline
-      	    FR-12: & The map shall update to show new path as the list is edited/extended.\\ \hline
-          \end{tabularx}
+        \begin{description}
+            \item[r4.1] \hfill \\ The point list shall have ability to edit ordering of latitude and longitude coordinates\\
+            \item[r4.2] \hfill \\ If adding new coordinates, the previous coordinate will connect to new one\\
+            \item[r4.3] \hfill \\ If coordinate is last on list, the path will end there\\
+      	    \item[r4.4] \hfill \\  The map shall update to show new path as the list is edited or extended\\
+          \end{description}
         \subsection{Open and Save Flight Plan in XML to SD Card}
           \subsubsection{Description and Priority}
             The Garmin G1000 uses SD cards to store flight plans, and does so in the XML format.
             For this program to be of any use, it \emph{must} support reading and writing these files.
-            Priority = High
-          \subsubsection{Stimulus/Response Sequences}
+          \subsubsection{Use-Case Sequences}
             \paragraph{Opening a file:}
             \begin{description}
               \item[Step 1] User initiates an open action.
@@ -303,30 +319,33 @@ Ian Litke & 2017-05-16 & Reformat Document & 0.3 \\ \hline
             \end{description}
           \subsubsection{Functional Requirements}
             \begin{description}
-              \item[FlightPlan.XML.Open] The program shall let a user open files. \\ 
-              \item[FlightPlan.XML.Open.Select] The program shall prompt the user to select a file to open. \\ \
-              \item[FlightPlan.XML.Open.Failure] After a plan is selected to open, if it fails, the user shall be alerted to the failure. \\ 
-              \item[FlightPlan.XML.Open.Success] After a plan is selected to open, if it succeeds, the user interface should automatically update to reflect the plan. \\ 
-              \item[FlightPlan.XML.Save] The program shall let a user save files. \\ \
-              \item[FlightPlan.XML.Save.Select] If the program cannot detect where the file was opened from,
+              \item[r5.1.1] The program shall let a user open files. \\
+              \item[r5.1.2] The program shall prompt the user to select a file to open. \\ \
+              \item[r5.1.3] After a plan is selected to open, if it fails, the user shall be alerted to the failure. \\
+              \item[r5.1.4] After a plan is selected to open, if it succeeds, the user interface should automatically update to reflect the plan. \\
+              \item[r5.2.1] The program shall let a user save files. \\ \
+              \item[r5.2.2] If the program cannot detect where the file was opened from,
                          or if the save-as option was used to initiate the save, the program shall prompt a user for a location to save the file. \\
-              \item[ FlightPlan.XML.Save.Failure] If an attempt to save a file fails, the user shall be alerted to the failure. \\ 
-              \item[FlightPlan.XML.Save.Success] If an attempt to save a file succeeds, the program shall display a message indicating the success. \\ 
+              \item[r5.2.3] If an attempt to save a file fails, the user shall be alerted to the failure. \\
+              \item[r5.2.4] If an attempt to save a file succeeds, the program shall display a message indicating the success. \\
             \end{description}
           \newpage
 \section{External Interface Requirements}
   This section provides a description of all inputs into and outputs from the system.
   It also gives a description of the software and communication interfaces and provides a basic prototype of the user interface.
 \subsection{User Interfaces}
-  The user interface is divided into two main sections: the map view on the right and waypoint editing on the left.
+  The user interface is divided into two main sections: the map view on the right and way-point editing on the left.
   The user may load up previously saved flight plans or create a new plan as well as modify the current selected plan.
+  See figure \ref{fig:ui} for a sample mockup interface.
   \begin{figure}[!ht]
     \includegraphics[scale=0.5]{images/FlightPlanning_Interface.jpg}
+    \caption{Example of an interface - final version may not be represented}
+    \label{fig:ui}
   \end{figure}
-  
+
   \subsection{Hardware Interfaces}
     There are no direct hardware interfaces, however the flight plans that are saved must be able to written to SD card.
-  
+
     \subsection{Software Interfaces}
      No software interface requirements have been identified at this time.
   \subsection{Communications Interfaces}
@@ -335,7 +354,7 @@ Ian Litke & 2017-05-16 & Reformat Document & 0.3 \\ \hline
   \subsection{Performance Requirements}
   The user interface should be able to render the maps within 1 minute of request from the user.
 
-  \subsection{Safety Requirments}
+  \subsection{Safety Requirements}
   No safety requirements have been identified.
   \subsection{Security Requirements}
   No security requirements have been identified.
